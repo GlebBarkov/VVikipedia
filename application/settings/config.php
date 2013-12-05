@@ -31,7 +31,7 @@ $config = array (
             // Пароль пользователя
             'password'      => '',
             // Имя базы
-            'dbname'        => 'zend',
+            'dbname'        => 'WiDP',
             // Опции драйвера
             'driver_options'=> array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8'),
             // Профайлер БД

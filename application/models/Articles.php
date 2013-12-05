@@ -35,7 +35,7 @@ class Articles extends Zend_Db_Table_Abstract
             ->order('id DESC')
             // Количество возвращаемых записей
             ->limit(2)
-            ;
+        ;
 
         if (!is_null($articleId)) {
             
