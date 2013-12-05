@@ -15,7 +15,7 @@ class IndexController extends Zend_Controller_Action
      */
     public function indexAction() 
     {
-        $this->view->content = '<h1>I LOVE ZEND FRAMEWORK!</h1>';
+        $this->view->content = '<h1>Welcome to VVIkipedia!</h1>';
     }
 
     /**

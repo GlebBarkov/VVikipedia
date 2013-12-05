@@ -12,7 +12,7 @@
     </div>
     <div id="main">
         <div id="left">
-            <div style = "margin:5px;">Best Articles:</div>
+            <div style = "margin:5px;">New Article's:</div>
             <?php echo $this->action('index', 'articles'); ?>
             <div id = "copy">(c) St54509. </div>
         </div>
