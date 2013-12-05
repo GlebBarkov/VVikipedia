@@ -23,9 +23,20 @@ class RegistrationController extends Zend_Controller_Action
      */
     public function saveAction()
     {
+        // Получение параметра пришедшего от пользователя
+        $name = $this->_getParam('name');
+        $realname = $this->_getParam('realname');
+        $email = $this->_getParam('email');
+        $pass = $this->_getParam('pass');
+        // Создание объекта модели, благодаря autoload нам нет необходимости подключать класс через require
+        $modelRegistration = new Registration();
 
-        $this->view->content = '<h1>SAVE USER</h1>';
+        // Выполнения метода модели по получению информации о статье
+        $modelRegistration->setUser($realname,$email,$pass,$name);
 
+        //var_dump($articleId);die;
+        //return $articleId;
+        //$this->view->content = $articleId;
     }
 
 }

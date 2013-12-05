@@ -14,7 +14,7 @@ class Registration extends Zend_Db_Table_Abstract
      * Имя таблицы
      * @var string
      */
-    protected $_name = 'registration';
+    protected $_name = 'users';
 
     /**
      * Получить все статьи или одну
@@ -22,41 +22,17 @@ class Registration extends Zend_Db_Table_Abstract
      * @param int $articleId Идентификатор статьи
      * @return array
      */
-    public function setUser($login,$name,$pass,$email)
+    public function setUser($realname,$email,$pass,$name)
     {
+        $table = new Registration();
+        $data = array(
+            'name' => $name,
+            'realname' => $realname,
+            'pass' => $pass,
+            'email' => $email,
+        );
+        $table->insert($data);
 
-        // Создаем объект Zend_Db_Select
-        $select = $this->getAdapter()->select()
-            // Таблица из которой делается выборка
-            ->from($this->_name)
-            // Добавление таблицы с помощью join, указывается поле связи
-            ->join('users', 'users.id = articles.author_id', array('name'))
-            // Порядок сортировки
-            ->order('id DESC')
-            // Количество возвращаемых записей
-            ->limit(2)
-            ;
-
-        if (!is_null($articleId)) {
-
-            // Условие на выборку
-            $select->where("articles.id = ?", $articleId);
-            // Выполнение запроса
-            $stmt = $this->getAdapter()->query($select);
-            // Получение данных в виде объекта, по умолчанию в виде ассоциативного массива
-            $result = $stmt->fetch(Zend_Db::FETCH_OBJ);
-
-
-        }
-        else {
-
-            $stmt = $this->getAdapter()->query($select);
-            // Получение данных в виде массива объектов, по умолчанию в виде массива ассоциативных массивов
-            $result = $stmt->fetchAll(Zend_Db::FETCH_OBJ);
-
-        }
-
-        return $result;
 
     }
 
