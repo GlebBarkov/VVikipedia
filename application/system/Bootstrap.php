@@ -4,12 +4,12 @@ require 'Zend/Loader.php';
 
 /**
  * Bootstrap
- * 
+ *
  * Главный системный класс, используется для настройки и запуска приложения
- * 
+ *
  * @author Александр Махомет aka San для http://zendframework.ru
  */
-class Bootstrap 
+class Bootstrap
 {
     /**
      * Объект конфигурации
@@ -23,28 +23,28 @@ class Bootstrap
      *
      * @var array $config Конфигурация
      */
-    public function run($config) 
+    public function run($config)
     {
         try {
             // Настройка загрузчика
             $this->setLoader();
-                        
+
             // Настройка конфигурации
             $this->setConfig($config);
 
             // Настройка Вида
             $this->setView();
-            
+
             // Подключение к базе данных
             $this->setDbAdapter();
 
             // Подключение маршрутизации
             $router = $this->setRouter();
-            
-            // Создание объекта front контроллера 
+
+            // Создание объекта front контроллера
             $front = Zend_Controller_Front::getInstance();
 
-            // Настройка front контроллера, указание базового URL, правил маршрутизации 
+            // Настройка front контроллера, указание базового URL, правил маршрутизации
             $front->setBaseUrl($this->_config->url->base)
                   ->throwexceptions(true)
                   ->setRouter($router);
@@ -52,17 +52,17 @@ class Bootstrap
             // Запуск приложения, в качестве параметра передаем путь к папке с контроллерами
             Zend_Controller_Front::run($this->_config->path->controllers);
 
-        } 
+        }
         catch (Exception $e) {
-            // Перехват исключений 
+            // Перехват исключений
             Error::catchException($e);
         }
     }
-    
+
     /**
      * Настройка загрузчика
      */
-    public function setLoader() 
+    public function setLoader()
     {
         // Запуск автозагрузки
         Zend_Loader::registerAutoload();
@@ -70,7 +70,7 @@ class Bootstrap
 
     /**
      * Настройка конфигурации
-     * 
+     *
      * @param array $config Настройки
      */
     public function setConfig($config)
@@ -78,12 +78,12 @@ class Bootstrap
         $config = new Zend_Config($config);
         $this->_config = $config;
         Zend_Registry::set('config', $config);
-    } 
-    
+    }
+
     /**
      * Настройка вида
-     */    
-    public function setView() 
+     */
+    public function setView()
     {
         // Инициализация Zend_Layout, настройка пути к макетам, а также имени главного макета.
         // Параметр layout указан лишь для примера, по умолчанию имя макета именно "layout"
@@ -118,17 +118,17 @@ class Bootstrap
 
         Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
     }
-            
+
     /**
      * Установка соединения с базой данных и помещение его объекта в реестр.
      */
-    public function setDbAdapter() 
+    public function setDbAdapter()
     {
         // Подключение к БД, так как Zend_Db "понимает" Zend_Config, нам достаточно передать специально сформированный объект конфигурации в метод factory
         $db = Zend_Db::factory($this->_config->db);
-        
-        // Задание адаптера по умолчанию для наследников класса Zend_Db_Table_Abstract 
-        Zend_Db_Table_Abstract::setDefaultAdapter($db);    
+
+        // Задание адаптера по умолчанию для наследников класса Zend_Db_Table_Abstract
+        Zend_Db_Table_Abstract::setDefaultAdapter($db);
 
         // Занесение объекта соединения c БД в реестр
         Zend_Registry::set('db', $db);
@@ -137,7 +137,7 @@ class Bootstrap
     /**
      * Настройка маршрутов
      */
-    public function setRouter() 
+    public function setRouter()
     {
         // Подключение файла правил маршрутизации
         require($this->_config->path->system . 'routes.php');
@@ -146,8 +146,16 @@ class Bootstrap
         if (!($router instanceof Zend_Controller_Router_Abstract)) {
             throw new Exception('Incorrect config file: routes');
         }
-        
+
         return $router;
     }
-        
+
+    protected function _initScript()
+    {
+        $this->view->headScript()
+            ->prependFile( "/js/jquery.js", $type = 'text/javascript' );
+        $this->view->headScript()
+            ->prependFile( "/js/functions.js", $type = 'text/javascript' );
+    }
+
 }

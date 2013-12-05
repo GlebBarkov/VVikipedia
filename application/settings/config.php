@@ -1,7 +1,7 @@
 <?php
 /**
  * Конфигурационный файл
- * 
+ *
  * @author Александр Махомет aka San для http://zendframework.ru
  */
 
@@ -20,18 +20,18 @@ $baseUrl = '/';
 $config = array (
     // Настройки соединения с БД
     'db'    => array (
-        // Адаптер    
+        // Адаптер
         'adapter'   => 'PDO_MYSQL',
         // Параметры
-        'params'    => array( 
+        'params'    => array(
             // Сервер БД
             'host'          => 'localhost',
-            // Имя пользователя 
+            // Имя пользователя
             'username'      => 'root',
             // Пароль пользователя
             'password'      => '',
             // Имя базы
-            'dbname'        => 'WiDP',
+            'dbname'        => 'zend',
             // Опции драйвера
             'driver_options'=> array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8'),
             // Профайлер БД
