@@ -12,10 +12,18 @@ div#menu a {padding-right:10px;}
 div#block {margin:20px;}
 div#block #title{margin:20px;}
 div#block #text{margin:20px;}
-
+/*дата в статье*/
 div#block #date{margin:20px;}
-
+/*вход и регестрация*/
 #login-form { float:left; }
 #login-form input { width:175px; height:25px; border-radius:8px; border:1px solid #ddd; clear:both; float:left; margin-bottom:10px; }
 #login-form button { clear:both; float:left; margin-top:10px; }
-
+/*добавить новость*/
+#addarticle-form{ float:left; }
+#addarticle-form input{ width:175px; height:25px; border-radius:8px; border:1px solid #ddd; clear:both; float:left; margin-bottom:10px; }
+#addarticle-form button{ clear:both; float:left; margin-top:10px; }
+#addarticle-form textarea{ width:175px; height:175px; border-radius:8px; border:1px solid #ddd; clear:both; float:left; margin-bottom:10px; }
+/*поиск*/
+#search-form{ float:right; }
+#search-form{ width:175px; height:25px; border-radius:8px; border:1px solid #ddd; clear:both; float:right; margin-bottom:10px; }
+#search-from button{ clear:both; float:right; margin-top:10px; }
