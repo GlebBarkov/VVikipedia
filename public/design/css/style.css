@@ -6,7 +6,7 @@ div#left {float:left;width:220px;overflow:hidden;padding:20px;background:#C7CFDE
 div#left #copy{margin-top:190px}
 div#content {float:left; width:700px; background:#E0E6ED;padding:20px;padding-left:70px;}
 
-div#menu {background:#A3B1C9;padding:20px;}
+div#menu {background:#A3B1C9;padding:20px;height: 70px;}
 div#menu a {padding-right:10px;}
 
 div#block {margin:20px;}
@@ -16,14 +16,14 @@ div#block #text{margin:20px;}
 div#block #date{margin:20px;}
 /*вход и регестрация*/
 #login-form { float:left; }
-#login-form input { width:175px; height:25px; border-radius:8px; border:1px solid #ddd; clear:both; float:left; margin-bottom:10px; }
+#login-form input { width:175px; height:25px; border-radius:8px; border:1px solid #ddd; clear:both; float:left; margin-bottom:10px;}
 #login-form button { clear:both; float:left; margin-top:10px; }
 /*добавить новость*/
 #addarticle-form{ float:left; }
 #addarticle-form input{ width:175px; height:25px; border-radius:8px; border:1px solid #ddd; clear:both; float:left; margin-bottom:10px; }
-#addarticle-form button{ clear:both; float:left; margin-top:10px; }
+#addarticle-form button{ clear:both; float:right; margin-top:10px; border-radius:8px; border:1px solid #ddd; }
 #addarticle-form textarea{ width:175px; height:175px; border-radius:8px; border:1px solid #ddd; clear:both; float:left; margin-bottom:10px; }
 /*поиск*/
 #search-form{ float:right; }
-#search-form{ width:175px; height:25px; border-radius:8px; border:1px solid #ddd; clear:both; float:right; margin-bottom:10px; }
-#search-from button{ clear:both; float:right; margin-top:10px; }
+#search-form{ border-radius:8px; border:1px solid #ddd; clear:both; float:right; margin-bottom:6px; height:25px;  padding:5px; width:206px; }
+#search-form button{ float:right; clear:both; margin-bottom:10px;}
