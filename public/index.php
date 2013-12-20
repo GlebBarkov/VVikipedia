@@ -28,3 +28,4 @@ require 'Bootstrap.php';
 // Запуск приложения
 $bootstrap = new Bootstrap();
 $bootstrap->run($config);
+

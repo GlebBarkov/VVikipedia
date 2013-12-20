@@ -30,7 +30,7 @@ class Articles extends Zend_Db_Table_Abstract
             // Таблица из которой делается выборка
             ->from($this->_name)
             // Добавление таблицы с помощью join, указывается поле связи
-            ->join('users', 'users.id = articles.author_id', array('name'))
+            ->join('users', 'users.id = articles.author_id', array('username'))
             // Порядок сортировки
             ->order('id DESC')
             // Количество возвращаемых записей

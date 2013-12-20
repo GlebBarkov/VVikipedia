@@ -3,7 +3,7 @@
         <b><?php echo $this->article->title ?></b>
     </div>
     <div id = "title">
-        <b>Added by: <?php echo $this->article->name ?></b>
+        <b>Added by: <?php echo $this->article->username ?></b>
     </div>
     <div id = "text">
         <?php echo nl2br($this->article->text) ?>

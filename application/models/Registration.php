@@ -16,19 +16,20 @@ class Registration extends Zend_Db_Table_Abstract
      */
     protected $_name = 'users';
 
+
     /**
      * Получить все статьи или одну
      *
      * @param int $articleId Идентификатор статьи
      * @return array
      */
-    public function setUser($real_name,$email,$pass,$name)
+    public function setUser($real_name,$email,$password,$username)
     {
         $table = new Registration();
         $data = array(
-            'name' => $name,
+            'username' => $username,
             'real_name' => $real_name,
-            'pass' => $pass,
+            'password' => $password,
             'email' => $email,
         );
         $table->insert($data);
