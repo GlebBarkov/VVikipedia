@@ -37,4 +37,19 @@ class Registration extends Zend_Db_Table_Abstract
 
     }
 
+    public function getId($username)
+    {
+        // Создание объекта Zend_Db_Table_Select,
+        // Нам не нужно указывать название таблицы как в Zend_Db_Select
+        $select = $this->select()
+        // Накладываем условие
+            ->where('username = ?', $username);
+        // Выполняем запрос и получаем объект Zend_Db_Table_Row в результате
+        // Нам не нужно предварительно выполнять запрос методом query, как в Zend_Db_Select
+        $result = $this->fetchRow($select);
+
+        return $result;
+
+    }
+
 }

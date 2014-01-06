@@ -22,18 +22,16 @@ class AddArticle extends Zend_Db_Table_Abstract
      * @param int $articleId Идентификатор статьи
      * @return array
      */
-    public function setUser($id,$author_id,$title,$text,$date)
+    public function setUser($author_id,$title,$text,$date)
     {
         $table = new AddArticle();
         $data = array(
-            'id' => $id,
             'author_id' => $author_id,
             'title' => $title,
             'text' => $text,
             'date' => $date
         );
         $table->insert($data);
-
 
     }
 

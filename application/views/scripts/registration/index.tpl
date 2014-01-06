@@ -17,11 +17,11 @@
 		jQuery.ajax({
 			type: 'POST',
 			dataType: 'json',
-			url: 'http://zend.local/registration/save/username/'+username+'/real_name/'+real_name+'/password/'+password+'/email/'+email,
+			url: 'http://zend2.localhost/registration/save/username/'+username+'/real_name/'+real_name+'/password/'+password+'/email/'+email,
 			success:
 					function(data) {
 
-						
+
 					}
 		});
 	}

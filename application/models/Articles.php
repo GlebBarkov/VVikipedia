@@ -2,27 +2,27 @@
 
 /**
  * Articles
- * 
+ *
  * Работа с статьями
- * 
+ *
  * @author Александр Махомет aka San для http://zendframework.ru
  */
-class Articles extends Zend_Db_Table_Abstract 
+class Articles extends Zend_Db_Table_Abstract
 {
 
     /**
      * Имя таблицы
-     * @var string 
-     */        
+     * @var string
+     */
     protected $_name = 'articles';
-    
+
     /**
      * Получить все статьи или одну
      *
      * @param int $articleId Идентификатор статьи
      * @return array
      */
-    public function getArticles($articleId = null) 
+    public function getArticles($articleId = null)
     {
 
         // Создаем объект Zend_Db_Select
@@ -38,9 +38,9 @@ class Articles extends Zend_Db_Table_Abstract
         ;
 
         if (!is_null($articleId)) {
-            
+
             // Условие на выборку
-            $select->where("articles.id = ?", $articleId); 
+            $select->where("articles.id = ?", $articleId);
             // Выполнение запроса
             $stmt = $this->getAdapter()->query($select);
             // Получение данных в виде объекта, по умолчанию в виде ассоциативного массива
@@ -52,12 +52,18 @@ class Articles extends Zend_Db_Table_Abstract
 
             $stmt = $this->getAdapter()->query($select);
             // Получение данных в виде массива объектов, по умолчанию в виде массива ассоциативных массивов
-            $result = $stmt->fetchAll(Zend_Db::FETCH_OBJ);    
+            $result = $stmt->fetchAll(Zend_Db::FETCH_OBJ);
 
         }
 
         return $result;
 
+    }
+
+    public function getmyArticles($author_id)
+    {
+        $db = new Articles();
+        return $db->fetchAll('author_id='.$author_id);
     }
 
 }

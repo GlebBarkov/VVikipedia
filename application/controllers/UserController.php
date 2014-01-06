@@ -16,41 +16,42 @@ class UserController extends Zend_Controller_Action
     }
 
     public function loginformAction()
-  {
-    $request = $this->getRequest();
+    {
+        $request = $this->getRequest();
+        $auth		= Zend_Auth::getInstance();
+        if($auth->hasIdentity()){
+            $this->_redirect('/user/userpage');
+        }
+    }
 
-    $this->view->assign('action', $request->getBaseURL()."/user/auth");
-    $this->view->assign('title', 'Login Form');
-    $this->view->assign('username', 'User Name');
-    $this->view->assign('password', 'Password');
-  }
   public function authAction(){
-    $request    = $this->getRequest();
-    $registry   = Zend_Registry::getInstance();
-    $auth       = Zend_Auth::getInstance();
-    $db = $registry['db'];
-    $authAdapter = new Zend_Auth_Adapter_DbTable($db);
-    $authAdapter->setTableName('users')
-                ->setIdentityColumn('username')
-                ->setCredentialColumn('password');
-    // Set the input credential values
-    $uname = $request->getParam('username');
-    $paswd = $request->getParam('password');
-    $authAdapter->setIdentity($uname);
-    $authAdapter->setCredential(md5($paswd));
-    // Perform the authentication query, saving the result
-    $result = $auth->authenticate($authAdapter);
+      $request 	= $this->getRequest();
+      $registry 	= Zend_Registry::getInstance();
+      $auth		= Zend_Auth::getInstance();
+      $DB = $registry['db'];
 
-    if($result->isValid()){
-      //print_r($result);
-      $data = $authAdapter->getResultRowObject(null,'password');
-      $auth->getStorage()->write($data);
+      $authAdapter = new Zend_Auth_Adapter_DbTable($DB);
+      $authAdapter->setTableName('users')
+          ->setIdentityColumn('username')
+          ->setCredentialColumn('password');
 
-      $this->_redirect('/user');
-    }
-    else{
-    $this->_redirect('/user/loginform');
-    }
+      // Set the input credential values
+      $uname = $request->getParam('username');
+      $paswd = $request->getParam('password');
+      $authAdapter->setIdentity($uname);
+      $authAdapter->setCredential(md5($paswd));
+
+      // Perform the authentication query, saving the result
+      $result = $auth->authenticate($authAdapter);
+
+      if($result->isValid()){
+          //print_r($result);
+          $data = $authAdapter->getResultRowObject(null,'password');
+          $auth->getStorage()->write($data);
+          $this->_redirect('/user/userpage');
+      }else{
+          return json_encode(false);
+      }
   }
   public function nameAction()
   {
@@ -60,6 +61,56 @@ class UserController extends Zend_Controller_Action
     $this->view->assign('gender', $request->getParam('gender'));
     $this->view->assign('title', 'User Name');
   }
+
+    public function articleAction()
+    {
+        $request = $this->getRequest();
+        $auth		= Zend_Auth::getInstance();
+        if(!$auth->hasIdentity()){
+            $this->_redirect('/user/loginform');
+        }
+    }
+
+    public function addarticleAction()
+    {
+        $auth		= Zend_Auth::getInstance();
+        $username	= $auth->getIdentity()->username;
+        // Получение параметра пришедшего от пользователя
+        $registrationModel = new Registration();
+        $userid = $registrationModel->getId($username);
+        $userid = $userid['id'];
+        $author_id = $userid;
+        $title = $this->_getParam('title');
+        $text = $this->_getParam('text');
+        $date = date("Y.m.d");
+
+
+        // Создание объекта модели, благодаря autoload нам нет необходимости подключать класс через require
+        $modelAddArticle = new AddArticle();
+
+        // Выполнения метода модели по получению информации о статье
+        $modelAddArticle->setUser($author_id,$title,$text,$date);
+
+        //var_dump($articleId);die;
+        //return $articleId;
+        //$this->view->content = $articleId;
+    }
+
+    public function myarticleAction() {
+
+        $auth		= Zend_Auth::getInstance();
+        $username	= $auth->getIdentity()->username;
+        // Получение параметра пришедшего от пользователя
+        $registrationModel = new Registration();
+        $userid = $registrationModel->getId($username);
+        $userid = $userid['id'];
+
+        $articleModel = new Articles();
+        $myarticles = $articleModel->getmyArticles((int)$userid);
+
+        $this->view->content = $myarticles;
+    }
+
   public function registerAction()
   {
     $request = $this->getRequest();

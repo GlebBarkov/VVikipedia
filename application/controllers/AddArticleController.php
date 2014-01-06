@@ -22,7 +22,7 @@ class AddArticleController extends Zend_Controller_Action
     /**
      * Страница из меню
      */
-    public function saveAction()
+    public function addarticleAction()
     {
         // Получение параметра пришедшего от пользователя
         $id = null;
