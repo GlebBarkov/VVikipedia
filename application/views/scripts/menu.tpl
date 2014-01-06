@@ -10,7 +10,7 @@ echo '<a href = "http://zend2.localhost/user/loginform">Login</a>';
 }
 else { echo '<a href="http://zend2.localhost/user/article">Add Articles</a>';
 echo '<a href="http://zend2.localhost/user/myarticle">My Articles</a>';
-echo '<a href="http://zend2.localhost/user/loginform">Logout</a>'; }
+echo '<a href="http://zend2.localhost/user/logout">Logout</a>'; }
 ?>
 <form  action="" method="post" id="search-form">
     <input id="search" value="search" type="text">

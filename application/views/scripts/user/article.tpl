@@ -20,6 +20,8 @@
                     function(data) {
                         console.log(data);
                     }
+
         });
+		window.setTimeout('location.reload()', 2000);
     }
 </script>
