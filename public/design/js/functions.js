@@ -25,6 +25,6 @@ $(document).ready(function(){
                 });
         });
     };
-    $('input:text, textarea').ToggleInputValue();
+    $('.login input:text, .login textarea,#login-form input:text, #login-form textarea, input.username, input.password').ToggleInputValue();
 
 });
